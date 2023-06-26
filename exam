@@ -1,0 +1,2153 @@
+MCA DATA STRUCTURE SEM-1
+
+
+1. Write a program to demonstrate Bubble sort.
+CODE:
+import java.util.Scanner;
+public class bubble
+{
+ public static void main(String[] args) {
+ Scanner input = new Scanner(System.in);
+ System.out.print("Enter the number of elements you want to sort: ");
+ int n = input.nextInt();
+ int[] arr = new int[n];
+ System.out.println("Enter the elements:");
+ for (int i = 0; i < n; i++) {
+ arr[i] = input.nextInt();
+ }
+ bubbleSort(arr);
+ System.out.println("Sorted array in ascending order:");
+ for (int i = 0; i < n; i++) {
+ System.out.print(arr[i] + " ");
+ }
+ }
+ public static void bubbleSort(int[] arr) {
+ int n = arr.length;
+ for (int i = 0; i < n - 1; i++) {
+ for (int j = 0; j < n - i - 1; j++) {
+MCA DATA STRUCTURE SEM-1
+ if (arr[j] > arr[j + 1]) {
+ int temp = arr[j];
+ arr[j] = arr[j + 1];
+ arr[j + 1] = temp;
+ }
+ }
+ }
+ }
+}
+
+OUTPUT:
+Enter the number of elements you want to sort: 7
+Enter the elements:
+52 14 28 21 88 62 13
+Sorted array in ascending order:
+13 14 21 28 52 62 88
+
+
+
+
+2. Write a program to perform Insertion Sort.
+CODE:
+import java.util.Scanner;
+public class insertion {
+ public static void main(String[] args) {
+ Scanner input = new Scanner(System.in);
+ System.out.print("Enter the size of the array: ");
+ int n = input.nextInt();
+ int[] arr = new int[n];
+ System.out.println("Enter the elements of the array:");
+ for (int i = 0; i < n; i++) {
+ arr[i] = input.nextInt();
+ }
+ insertionSort(arr);
+ System.out.println("The sorted array is:");
+ for (int i = 0; i < n; i++) {
+ System.out.print(arr[i] + " ");
+ }
+ }
+ public static void insertionSort(int[] arr) {
+ for (int i = 1; i < arr.length; i++) {
+ int key = arr[i];
+ int j = i - 1;
+ while (j >= 0 && arr[j] > key) {
+ arr[j + 1] = arr[j];
+ j--;
+ }
+ arr[j + 1] = key;
+ }
+ }
+}
+
+
+OUTPUT:
+Enter the size of the array: 7
+Enter the elements of the
+array:
+5 2 87 45 23 59 90
+The sorted array is:
+5 23 45 59 87 90
+
+
+
+
+
+
+3. Write a program to perform Quick Sort.
+CODE:
+import java.util.*;
+public class quick {
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter the size of the array: ");
+ int size = scanner.nextInt();
+ int[] arr = new int[size];
+ System.out.println("Enter the elements of the array:");
+ for (int i = 0; i < size; i++) {
+ arr[i] = scanner.nextInt();
+ }
+ quickSort(arr, 0, arr.length - 1);
+ System.out.println("Sorted array: " + Arrays.toString(arr));
+ }
+ public static void quickSort(int[] arr, int low, int high) {
+ if (low < high) {
+ int pivotIndex = partition(arr, low, high);
+ quickSort(arr, low, pivotIndex - 1);
+ quickSort(arr, pivotIndex + 1, high);
+ }
+ }
+ public static int partition(int[] arr, int low, int high) {
+ int pivot = arr[high];
+ int i = low - 1;
+ for (int j = low; j < high; j++) {
+ if (arr[j] < pivot) {
+ i++;
+ int temp = arr[i];
+ arr[i] = arr[j];
+ arr[j] = temp;
+ }
+ }
+ int temp = arr[i + 1];
+ arr[i + 1] = arr[high];
+ arr[high] = temp;
+ return i + 1;
+ }
+}
+
+
+OUTPUT:
+ Enter the size of the array: 8
+Enter the elements of the
+array:
+5 3 6 9 4 1 8 2
+Sorted array: [1, 2, 3, 4, 5, 6,
+8, 9]
+
+
+
+
+4. Write a program to perform Selection Sort.
+CODE:
+import java.util.Scanner;
+public class selection {
+ public static void main(String[] args) {
+ Scanner input = new Scanner(System.in);
+ System.out.print("Enter the number of elements you want to sort: ");
+ int n = input.nextInt();
+ int[] arr = new int[n];
+ System.out.println("Enter " + n + " integers: ");
+ for (int i = 0; i < n; i++) {
+ arr[i] = input.nextInt();
+ }
+ // perform selection sort
+ for (int i = 0; i < n - 1; i++) {
+ int minIndex = i;
+ for (int j = i + 1; j < n; j++) {
+ if (arr[j] < arr[minIndex]) {
+ minIndex = j;
+ } }
+ int temp = arr[minIndex];
+ arr[minIndex] = arr[i];
+ arr[i] = temp;
+ }
+ System.out.println("Sorted array:");
+ for (int i = 0; i < n; i++) {
+ System.out.print(arr[i] + " ");
+ }
+ }
+}
+
+
+OUTPUT:
+Enter the number of elements you
+want to sort:
+7
+Enter 7 integers:
+13 6 27 9 45 25 38
+Sorted array:
+9 13 25 27 38 45
+
+
+
+
+
+5. Write a program to demonstrate Binary Search.
+CODE:
+import java.util.Scanner;
+public class binary
+{
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ // Ask user for the length of the array
+ System.out.print("Enter the length of the array: ");
+ int length = scanner.nextInt();
+ // Create the array and fill it with values
+ int[] array = new int[length];
+ System.out.println("Enter " + length + " integers in ascending order:");
+ for (int i = 0; i < length; i++) {
+ array[i] = scanner.nextInt();
+ }
+ // Ask user for the value to search for
+ System.out.print("Enter the value to search for: ");
+ int target = scanner.nextInt();
+ // Perform binary search
+ int index = binarySearch(array, target);
+ // Output the result
+ if (index == -1) {
+ System.out.println("Value not found in the array.");
+ } else {
+ System.out.println("Value found at index " + index + ".");
+ }
+ scanner.close();
+ }
+ public static int binarySearch(int[] array, int target) {
+ int low = 0;
+ int high = array.length - 1;
+ while (low <= high) {
+ int mid = (low + high) / 2;
+ if (array[mid] == target) {
+ return mid;
+ } else if (array[mid] < target) {
+ low = mid + 1;
+ } else {
+ high = mid - 1;
+ }
+ }
+ return -1;
+ }
+}
+
+
+
+OUTPUT:
+Enter the length of the array: 8
+Enter 8 integers in ascending order:
+2 4 5 8 20 27 36 47
+Enter the value to search for: 27
+Value found at index 5.
+Enter the length of the array: 8
+Enter 8 integers in ascending order:
+2 4 6 7 10 28 37 46
+Enter the value to search for: 5
+Value not found in the array
+
+
+
+
+6. Write a java program to demonstrate Stack operation
+CODE:
+import java.util.*;
+class stack_array
+{
+int top=-1;
+int n=3;
+Scanner sc=new Scanner(System.in);
+int a[]=new int[n];
+void push()
+{
+if(top==(n-1))
+{
+System.out.println("Stack is oveflow");
+}
+else
+{
+System.out.println("Enter a data");
+Scanner sc=new Scanner(System.in);
+int i=sc.nextInt();
+top=top+1;
+a[top]=i;
+System.out.println("Item is inserted");
+}}
+void pop()
+{
+if(top==-1)
+{
+System.out.println("Stack is underflow");
+}
+else
+{
+top=top-1;
+System.out.println("item is deleted}");
+}}
+void peek()
+{
+if(top==-1)
+{
+System.out.println("stack is empty");
+return;
+}
+System.out.println(a[top]);
+}
+void display()
+{
+ if(top==-1)
+ {
+ System.out.println("stack is empty");
+ }
+ else
+ {
+System.out.println("items are");
+for(int j=top;j>=0;j--)
+{
+System.out.println(a[j]);
+}
+}
+}
+}
+public class stack
+{
+public static void main(String args[])
+{
+stack_array s=new stack_array();
+Scanner sc=new Scanner(System.in);
+int l;
+do
+{
+System.out.println("Menu");
+System.out.println("1.PUSH");
+System.out.println("2.POP");
+System.out.println("3.peek");
+System.out.println("4.Display");
+System.out.println("5.Exit");
+System.out.println("Enter your choic");
+int d=sc.nextInt();
+switch(d)
+{
+case 1:
+s.push();
+break;
+case 2:
+s.pop();
+break;
+case 3:
+s.peek();
+break;
+case 4:
+s.display();
+break;
+case 5:
+System.exit(0);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+System.out.println("Enter 0 to go back to the main menu");
+l=sc.nextInt();
+}
+while(l==0);
+}
+}
+
+
+OUTPUT:
+ Menu
+1.PUSH
+2.POP
+3.peek
+4.Display
+5.Exit
+Enter your choice
+1
+Enter a data
+5
+Item is inserted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+1
+Enter a data
+10
+Item is inserted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+1
+Enter a data
+15
+Item is inserted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+2
+item is deleted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+4
+items are
+10
+5
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+3
+10
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+2
+item is deleted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+2
+item is deleted
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+2
+Stack is underflow
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+4
+stack is empty
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+3
+stack is empty
+Enter 0 to go back to the main
+menu
+0
+Enter your choice
+5
+
+
+
+7. Write a java program to demonstrate Queue operation.
+CODE:
+import java.util.*;
+class queue_array
+{
+ int f=-1,r=-1;
+ Scanner se=new Scanner(System.in);
+ int n=se.nextInt();
+ int q[]=new int[n];
+ void enqueue()
+ {
+ if(r==(n-1))
+ {
+ System.out.println("Queue is overfull ! ");
+ }
+ else
+ {
+ System.out.println("Enter a data");
+ Scanner sc=new Scanner(System.in);
+ int i=sc.nextInt();
+ if(f==-1&&r==-1)
+ {
+ f=0;
+ r=0;
+ q[r]=i;
+ System.out.println("item is inserted");
+ }
+ else
+ {
+ r=r+1;
+ q[r]=i;
+ System.out.println("item is inserted");
+ }
+ }
+ }
+ void dequeue()
+ {
+ if(f==-1 && r==-1)
+ {
+ System.out.println("queue is underflow");
+ }
+ else
+ {
+ System.out.println("Item is deleted");
+ f=f+1;
+ if (f > r)
+ {
+ f = r = -1;
+ }
+ }
+ }
+void display()
+ {
+ if(f==-1 && r==-1){
+ System.out.println("Queue is empty !");
+ }
+ else {
+ System.out.println("items are");
+ for (int i = f; i <= r; i++) {
+ System.out.println(q[i]);
+ }
+ }
+ }
+}
+public class queue
+{
+ public static void main(String args[])
+ {
+ System.out.println("enter size for a queue : ");
+ queue_array s=new queue_array();
+ Scanner sc=new Scanner(System.in);
+ int l;
+ do
+ {
+ System.out.println("Menu");
+ System.out.println("1.Enqueue");
+ System.out.println("2.Dequeue");
+ System.out.println("3.Display");
+ System.out.println("4.Exit");
+ System.out.println("Enter your choice");
+ int d=sc.nextInt();
+ switch(d)
+ {
+ case 1:
+ s.enqueue();
+ break;
+ case 2:
+ s.dequeue();
+ break;
+ case 3:
+ s.display();
+ break;
+ case 4:
+ System.exit(0);
+ break;
+ default:
+ System.out.println("Wrong choice");
+ break;
+ }
+ System.out.println("enter 0 to continue ");
+ l=sc.nextInt();
+ }
+ while(l==0);
+ }
+}
+
+
+OUTPUT:
+enter size for a queue :
+3
+Menu
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+Enter your choice
+1
+Enter a data
+10
+item is inserted
+enter 0 to continue
+0
+Enter your choice
+1
+Enter a data
+20
+item is inserted
+enter 0 to continue
+0
+Enter your choice
+1
+Enter a data
+30
+item is inserted
+enter 0 to continue
+0
+Enter your choice
+1
+Queue is overfull !
+enter 0 to continue
+0
+Enter your choice
+2
+Item is deleted
+enter 0 to continue
+0
+Enter your choice
+3
+items are
+20
+30
+enter 0 to continue
+0
+Enter your choice
+2
+Item is deleted
+enter 0 to continue
+0
+Enter your choice
+2
+Item is deleted
+enter 0 to continue
+0
+Enter your choice
+2
+queue is underflow
+enter 0 to continue
+0
+
+
+
+
+8. Write a java program to convert Infix to prefix operation.
+CODE:
+import java.util.Stack;
+import java.util.Scanner;
+public class InfixToPrefix {
+ public static int precedence(char op) {
+ switch (op) {
+ case '+':
+ case '-':
+ return 1;
+ case '*':
+ case '/':
+ return 2;
+ case '^':
+ return 3;
+ default:
+ return -1;
+ }
+ }
+ public static String reverseString(String str) {
+ StringBuilder reversed = new StringBuilder();
+ for (int i = str.length() - 1; i >= 0; i--) {
+ reversed.append(str.charAt(i));
+ }
+ return reversed.toString();
+ }
+ public static String infixToPrefix(String infix) {
+ String reversedInfix = reverseString(infix);
+ Stack<Character> stack = new Stack<>();
+ StringBuilder prefix = new StringBuilder();
+ for (int i = 0; i < reversedInfix.length(); i++) {
+ char c = reversedInfix.charAt(i);
+ if (Character.isLetterOrDigit(c)) {
+ prefix.append(c);
+ }
+ else if (c == ')') {
+ stack.push(c);
+ }
+ else if (c == '(') {
+ while (!stack.isEmpty() && stack.peek() != ')') {
+ prefix.append(stack.pop());
+ }
+ if (!stack.isEmpty() && stack.peek() != ')') {
+ return "Invalid Expression"; // Invalid expression
+ } else {
+ stack.pop();
+ }
+ }
+ else {
+ while (!stack.isEmpty() && precedence(c) < precedence(stack.peek())) {
+ prefix.append(stack.pop());
+ }
+ stack.push(c);
+ }
+ }
+ while (!stack.isEmpty()) {
+ if (stack.peek() == ')') {
+ return "Invalid Expression"; // Invalid expression
+ }
+ prefix.append(stack.pop());
+ }
+ return reverseString(prefix.toString());
+ }
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter infix expression: ");
+ String infix = scanner.nextLine();
+ String prefix = infixToPrefix(infix);
+ System.out.println("Prefix expression: " + prefix);
+ }
+}
+
+
+OUTPUT:
+Enter the infix expression: (a*b)/c
+Infix: (a*b)/c
+Prefix: /*abc
+
+
+
+
+9. Write a java program to convert Infix to postfix operation.
+CODE:
+import java.util.Stack;
+import java.util.*;
+public class InfixToPostfix {
+ // precedence of operators
+ public static int precedence(char op) {
+ switch (op) {
+ case '+':
+ case '-':
+ return 1;
+ case '*':
+ case '/':
+ return 2;
+ case '^':
+ return 3;
+ default:
+ return -1;
+ }
+ }
+ // method to convert infix to postfix expression
+ public static String infixToPostfix(String infix) {
+ // initialize stack and postfix string
+ Stack<Character> stack = new Stack<>();
+ StringBuilder postfix = new StringBuilder();
+ // iterate over each character in infix expression
+ for (int i = 0; i < infix.length(); i++) {
+ char c = infix.charAt(i);
+ // if character is operand, add it to postfix string
+ if (Character.isLetterOrDigit(c)) {
+ postfix.append(c);
+ }
+ // if character is opening bracket, push it to stack
+ else if (c == '(') {
+ stack.push(c);
+ }
+ // if character is closing bracket, pop all operators from stack and add to
+postfix string until opening bracket is found
+ else if (c == ')') {
+ while (!stack.isEmpty() && stack.peek() != '(') {
+ postfix.append(stack.pop());
+ }
+ if (!stack.isEmpty() && stack.peek() != '(') {
+ return "Invalid Expression"; // invalid expression
+ } else {
+ stack.pop(); // remove opening bracket
+ } }
+ // if character is operator
+ else {
+ while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
+ postfix.append(stack.pop());
+ }
+ // push current operator to stack
+ stack.push(c);
+ }
+ }
+// pop remaining operators from stack and add to postfix string
+ while (!stack.isEmpty()) {
+ if (stack.peek() == '(') {
+ return "Invalid Expression"; // invalid expression
+ }
+ postfix.append(stack.pop());
+ }
+return postfix.toString();
+ }
+public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter infix expression: ");
+ String infix = scanner.nextLine();
+ String postfix = infixToPostfix(infix);
+ System.out.println("Postfix expression: " + postfix);
+ }
+}
+
+
+OUTPUT:
+ Enter infix expression: (a*b)/c
+ Postfix expression: ab*c/
+
+
+
+
+10. Write a java program to demonstrate singly linked list Insertion.
+CODE:
+import java.util.*;
+class Link {
+ Node head;
+ class Node{
+ int data;
+ Node next;
+ Node(int x)
+ {
+ data = x;
+ next = null;
+ }
+ }
+ public Node insertStart(int data)
+ {
+ Node newNode = new Node(data);
+ newNode.next = head;
+ head = newNode;
+return head;
+ }
+public void insertLast(int data)
+ {
+ Node newNode = new Node(data);
+MCA DATA STRUCTURE SEM-1
+ if(head==null)
+ {
+ head = newNode;
+ return;
+ }
+ Node temp = head;
+ while(temp.next!=null)
+ temp = temp.next;
+ temp.next = newNode;
+ }
+ public void insertPosition(int n,int data)
+ {
+ int size = calcSize(head);
+ if(n < 1 || n > size)
+ System.out.println("Can't insert\n");
+ else
+ {
+ if(n==1)
+ {
+ insertStart(data);
+ return;
+ }
+ Node newNode = new Node(data);
+ Node temp = head;
+ while(--n > 1)
+ temp=temp.next;
+ newNode.next= temp.next;
+ temp.next = newNode;
+ }
+ }
+public void display()
+ {
+ if(head==null){
+ System.out.println("list is empty");
+ }
+ Node node = head;
+ while(node!=null)
+ {
+ System.out.print(node.data + " ");
+ node = node.next;
+ }
+ System.out.println();
+ }
+ public int calcSize(Node node){
+ int size = 0;
+ while(node!=null){
+ node = node.next;
+ size++;
+ }
+ return size;
+ }
+}
+ public class singlyinsert
+ {
+ public static void main(String[] args)
+ {
+ Scanner scan = new Scanner(System.in);
+ Link l=new Link();
+ while (true)
+ {
+ System.out.println("\nSingly Linked List Operations\n");
+ System.out.println("1. insert at begining");
+ System.out.println("2. insert at end");
+ System.out.println("3. insert at position");
+ System.out.println("4. display");
+ System.out.println("5.. exit");
+ System.out.println("Enter your choice");
+ int choice = scan.nextInt();
+ switch (choice)
+ {
+ case 1 :
+ System.out.println("Enter integer element to insert");
+ l.insertStart( scan.nextInt() );
+ break;
+ case 2 :
+ System.out.println("Enter integer element to insert");
+ l.insertLast( scan.nextInt() );
+ break;
+ case 3:
+ System.out.println("Enter integer element to insert");
+ int num = scan.nextInt() ;
+ System.out.println("Enter position");
+ int pos = scan.nextInt() ;
+ l.insertPosition(pos,num);
+ break;
+ case 4 :
+ l.display();
+ break;
+ case 5:
+ System.exit(0);
+ break;
+ default :
+ System.out.println("Wrong Entry \n ");
+ break;
+ }}}}
+
+
+OUTPUT:
+Singly Linked List Operations
+1. insert at begining
+2. insert at end
+3. insert at position
+4. display
+5.. exit
+Enter your choice
+4
+list is empty
+Enter your choice
+1
+Enter integer element to insert
+10
+Enter your choice
+1
+Enter integer element to insert
+20
+Enter your choice
+4
+20 10
+Enter your choice
+2
+Enter integer element to insert
+30
+Enter your choice
+3
+Enter integer element to insert
+40
+Enter position
+2
+Enter your choice
+4
+20 40 10 30
+Enter your choice
+6
+Wrong Entry
+
+
+
+
+
+11. Write a java program to demonstrate singly linked list Deletion.
+CODE:
+import java.util.*;
+class Link {
+ Node head;
+ class Node{
+ int data;
+ Node next;
+ Node(int x)
+ {
+ data = x;
+ next = null;
+ }
+ }
+ public Node insertStart(int data)
+ {
+ Node newNode = new Node(data);
+ newNode.next = head;
+ head = newNode;
+return head;
+ }
+public void display()
+ {
+ if(head==null)
+ {
+ System.out.println("list is empty");
+ }
+ Node node = head;
+ while(node!=null)
+ {
+ System.out.print(node.data + " ");
+ node = node.next;
+ }
+ System.out.println();
+ }
+ public int calcSize(Node node){
+ int size = 0;
+ while(node!=null){
+ node = node.next;
+ size++;
+ }
+ return size;
+ }
+ public void deleteStart()
+ {
+ if (head == null){
+ System.out.println("List is empty, not possible to delete");
+ return;
+ }
+ System.out.println("Deleted: " + head.data);
+ head = head.next;
+ }
+public void deleteLast()
+ {
+ if (head == null){
+ System.out.println("List is empty, not possible to delete");
+ return;
+ }
+ if(head.next == null)
+ {
+ System.out.println("Deleted: " + head.data);
+ head = head.next;
+ }
+ Node previous = null;
+ Node temp = head;
+ while (temp.next != null)
+ {
+ previous = temp;
+ temp = temp.next;
+ }
+ System.out.println("Deleted: " + temp.data);
+ previous.next = null;
+ }
+ public void deleteNthNode(int n)
+ {
+ int len =calcSize(head);
+ if(n < 1 || n > len)
+ System.out.println("Can't delete\n");
+ else
+ {
+ if(n == 1)
+ {
+ System.out.println("Deleted: " + head.data);
+ head = head.next;
+ return;
+ }
+ Node temp = head;
+ Node previous = null;
+ while(--n > 0) {
+ previous = temp;
+ temp = temp.next;
+ }
+ previous.next = temp.next;
+ System.out.println("Deleted: " + temp.data);
+ }
+ }
+}
+public class singlydelete
+ {
+ public static void main(String[] args)
+ {
+ Scanner scan = new Scanner(System.in);
+ Link l=new Link();
+ while (true)
+ {
+ System.out.println("\nDoubly Linked List delete Operations\n");
+ System.out.println("1. insert at begining");
+ System.out.println("2. delete at position");
+ System.out.println("3. delete at beg ");
+ System.out.println("4. delete at end");
+ System.out.println("5. display");
+ System.out.println("6.. exit");
+ System.out.println("Enter your choice");
+ int choice = scan.nextInt();
+ switch (choice) {
+ case 1 :
+ System.out.println("Enter integer element to insert");
+ l.insertStart( scan.nextInt() );
+ break;
+ case 2 :
+ System.out.println("Enter position");
+ int p = scan.nextInt() ;
+ l.deleteNthNode(p);
+ break;
+ case 3 :
+ l.deleteStart();
+ break;
+ case 4 :
+ l.deleteLast();
+ break;
+ case 5 :
+ l.display();
+ break;
+ case 6:
+ System.exit(0);
+ break;
+ default :
+ System.out.println("Wrong Entry \n ");
+ break;
+ }}
+ }
+ }
+
+
+
+OUTPUT:
+Singly Linked List delete Operations
+1. insert at begining
+2. delete at position
+3. delete at beg
+4. delete at end
+5. display
+6.. exit
+Enter your choice
+1
+Enter integer element to insert
+10
+Enter your choice
+1
+Enter integer element to insert
+20
+Enter your choice
+1
+Enter integer element to insert
+30
+Enter your choice
+1
+Enter integer element to insert
+40
+Enter your choice
+5
+40 30 20 10
+Enter your choice
+2
+Enter position
+3
+Deleted: 20
+Enter your choice
+5
+40 30 10
+Enter your choice
+3
+Deleted: 40
+
+
+Enter your choice
+5
+30 10
+Enter your choice
+4
+Deleted: 10
+Enter your choice
+5
+30
+Enter your choice
+3
+Deleted: 30
+Enter your choice
+5
+list is empty
+Enter your choice
+8
+Wrong Entry
+
+
+
+
+12. Write a java program to demonstrate doubly linked list Insertion.
+CODE:
+import java.util.Scanner;
+class Node {
+ int data;
+ Node prev;
+ Node next;
+}
+class DoublyLinkedList {
+ Node head;
+ void insertAtBeginning(int data) {
+ Node newNode = new Node();
+ newNode.data = data;
+ newNode.next = head;
+ newNode.prev = null;
+ if (head != null) {
+ head.prev = newNode;
+ }
+ head = newNode;
+ }
+ void insertAtEnd(int data) {
+ Node newNode = new Node();
+ newNode.data = data;
+ newNode.next = null;
+ if (head == null) {
+ newNode.prev = null;
+ head = newNode;
+ return;
+ }
+ Node last = head;
+ while (last.next != null) {
+ last = last.next;
+ }
+ last.next = newNode;
+ newNode.prev = last;
+ }
+void insertAtPosition(int data, int position) {
+ Node newNode = new Node();
+ newNode.data = data;
+ if (position == 1) {
+ newNode.next = head;
+ newNode.prev = null;
+ if (head != null) {
+ head.prev = newNode;
+ }
+ head = newNode;
+ return;
+ }
+ Node current = head;
+ for (int i = 1; i < position - 1 && current != null; i++) {
+ current = current.next;
+ }
+ if (current == null) {
+ System.out.println("Invalid position");
+ return;
+ }
+ newNode.next = current.next;
+ newNode.prev = current;
+ if (current.next != null) {
+ current.next.prev = newNode;
+ }
+ current.next = newNode;
+ }
+ void display() {
+ Node current = head;
+ if (current == null) {
+ System.out.println("List is empty");
+ return;
+ }
+ System.out.println("Nodes of the doubly linked list:");
+ while (current != null) {
+ System.out.print(current.data + " ");
+ current = current.next;
+ }
+ System.out.println();
+ }
+}
+public class doublyinsert
+{
+ public static void main(String[] args) {
+ Scanner sc = new Scanner(System.in);
+ DoublyLinkedList list = new DoublyLinkedList();
+ int choice, data, position;
+ while (true) {
+ System.out.println("1. Insert at beginning");
+ System.out.println("2. Insert at end");
+ System.out.println("3. Insert at position");
+ System.out.println("4. Display");
+ System.out.println("5. Exit");
+ System.out.print("Enter your choice: ");
+ choice = sc.nextInt();
+ switch (choice) {
+ case 1:
+ System.out.print("Enter the data to be inserted: ");
+ data = sc.nextInt();
+ list.insertAtBeginning(data);
+ break;
+ case 2:
+ System.out.print("Enter the data to be inserted: ");
+ data = sc.nextInt();
+ list.insertAtEnd(data);
+ break;
+ case 3:
+ System.out.print("Enter the data to be inserted: ");
+ data = sc.nextInt();
+ System.out.print("Enter the position: ");
+ position = sc.nextInt();
+ list.insertAtPosition(data, position);
+ break;
+ case 4:
+ list.display();
+ break;
+ case 5:
+ System.exit(0);
+ default:
+ System.out.println("Invalid choice");
+ }
+ }
+}
+}
+
+
+
+OUTPUT:
+1. Insert at beginning
+2. Insert at end
+3. Insert at position
+4. Display
+5. Exit
+Enter your choice: 4
+List is empty
+Enter your choice: 1
+Enter the data to be inserted: 10
+Enter your choice: 1
+Enter the data to be inserted: 20
+Enter your choice: 4
+Nodes of the doubly linked list:
+20 10
+Enter your choice: 2
+Enter the data to be inserted: 30
+Enter your choice: 4
+Nodes of the doubly linked list:
+20 10 30
+Enter your choice: 3
+Enter the data to be inserted: 40
+Enter the position: 2
+Enter your choice: 4
+Nodes of the doubly linked list:
+20 40 10 30
+Enter your choice: 7
+Invalid choice
+
+
+
+
+
+
+
+13. Write a java program to demonstrate doubly linked list deletion.
+CODE:
+import java.util.Scanner;
+public class doublydelete {
+ Node head;
+ Node tail;
+ int size;
+ static class Node {
+ int data;
+ Node prev;
+ Node next;
+ Node(int data) {
+ this.data = data;
+ this.prev = null;
+ this.next = null;
+ }
+ }
+ public void insertAtBeginning(int data) {
+ Node newNode = new Node(data);
+ if (head == null) {
+ head = tail = newNode;
+ } else {
+ newNode.next = head;
+ head.prev = newNode;
+ head = newNode;
+ }
+ size++;
+ }
+ public void deleteAtBeginning() {
+ if (head == null) {
+ System.out.println("List is empty.");
+ } else if (head == tail) {
+ head = tail = null;
+ size--;
+ } else {
+ head = head.next;
+ head.prev = null;
+ size--;
+ }
+ }
+public void deleteAtEnd() {
+ if (tail == null) {
+ System.out.println("List is empty.");
+ } else if (head == tail) {
+ head = tail = null;
+ size--;
+ }
+else
+{
+ tail = tail.prev;
+ tail.next = null;
+ size--;
+ }
+ }
+ public void deleteAtPosition(int position) {
+ if (position < 1 || position > size) {
+ System.out.println("Invalid position.");
+ } else if (position == 1) {
+ deleteAtBeginning();
+ } else if (position == size) {
+ deleteAtEnd();
+ } else {
+ Node temp = head;
+ for (int i = 1; i < position; i++) {
+ temp = temp.next;
+ }
+ temp.prev.next = temp.next;
+ temp.next.prev = temp.prev;
+ size--;
+ }
+ }
+ public void display() {
+ if (head == null) {
+ System.out.println("List is empty.");
+ } else {
+ Node temp = head;
+ while (temp != null) {
+ System.out.print(temp.data + " ");
+ temp = temp.next;
+ }
+ System.out.println();
+ }
+ }
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ doublydelete list = new doublydelete();
+ while (true)
+{
+ System.out.println("\nDoubly Linked List Operations");
+ System.out.println("1. Insert at beginning");
+ System.out.println("2. Delete at beginning");
+ System.out.println("3. Delete at end");
+ System.out.println("4. Delete at position");
+ System.out.println("5. Display");
+ System.out.println("6. Exit");
+ System.out.print("Enter your choice: ");
+ int choice = scanner.nextInt();
+ switch (choice)
+{
+ case 1:
+ System.out.print("Enter the value to be inserted: ");
+ int value = scanner.nextInt();
+ list.insertAtBeginning(value);
+ System.out.println("Value inserted successfully.");
+ break;
+ case 2:
+ list.deleteAtBeginning();
+ System.out.println("Value deleted successfully.");
+ break;
+ case 3:
+ list.deleteAtEnd();
+ System.out.println("Value deleted successfully.");
+ break;
+ case 4:
+ System.out.print("Enter the position of the value to be deleted: ");
+ int position = scanner.nextInt();
+ list.deleteAtPosition(position);
+ System.out.println("Value deleted successfully.");
+ break;
+ case 5:
+ list.display();
+ break;
+ case 6:
+ System.exit(0);
+ break;
+ default:
+ System.out.println("Invalid choice");
+ break;
+ }
+ }
+ }
+
+
+OUTPUT:
+Doubly Linked List
+Operations
+1. Insert at beginning
+2. Delete at beginning
+3. Delete at end
+4. Delete at position
+5. Display
+6. Exit
+Enter your choice: 1
+Enter the value to be
+inserted: 10
+Value inserted successfully.
+Enter your choice: 1
+Enter the value to be
+inserted: 20
+Value inserted successfully.
+Enter your choice: 1
+Enter the value to be
+inserted: 30
+Value inserted successfully.
+Enter your choice: 1
+Enter the value to be
+inserted: 40
+Value inserted successfully.
+Enter your choice: 5
+40 30 20 10
+Enter your choice: 2
+Value deleted successfully.
+Enter your choice: 5
+30 20 10
+Enter your choice: 3
+Value deleted successfully.
+Enter your choice: 5
+30 20
+Enter your choice: 4
+Enter the position of the
+value to be deleted: 2
+Value deleted successfully.
+Enter your choice: 5
+30
+Enter your choice: 2
+Value deleted successfully.
+Enter your choice: 2
+
+
+
+
+
+
+14. Write a java program to demonstrate Binary Search Tree Insertion and Deletion.
+CODE:
+import java.util.Scanner;
+class Node {
+int key;
+Node left, right;
+public Node(int item) {
+key = item;
+left = right = null;
+}
+}
+class BinarySearchTree {
+Node root;
+BinarySearchTree() {
+root = null;
+}
+void insert(int key) {
+root = insertRec(root, key);
+}
+Node insertRec(Node root, int key) {
+if (root == null) {
+root = new Node(key);
+return root;
+}
+if (key < root.key)
+root.left = insertRec(root.left, key);
+else if (key > root.key)
+root.right = insertRec(root.right, key);
+return root;
+}
+void delete(int key) {
+root = deleteRec(root, key);
+}
+Node deleteRec(Node root, int key) {
+if (root == null)
+return root;
+if (key < root.key)
+root.left = deleteRec(root.left, key);
+else if (key > root.key)
+root.right = deleteRec(root.right, key);
+else {
+if (root.left == null)
+return root.right;
+else if (root.right == null)
+return root.left;
+root.key = minValue(root.right);
+root.right = deleteRec(root.right, root.key);
+}
+return root;
+}
+int minValue(Node root) {
+int minv = root.key;
+while (root.left != null) {
+minv = root.left.key;
+root = root.left;
+}
+return minv;
+}
+void preorder() {
+preorderRec(root);
+}
+void preorderRec(Node root) {
+if (root != null) {
+System.out.print(root.key + " ");
+preorderRec(root.left);
+preorderRec(root.right);
+}
+}
+void inorder() {
+inorderRec(root);
+}
+void inorderRec(Node root) {
+if (root != null) {
+inorderRec(root.left);
+System.out.print(root.key + " ");
+inorderRec(root.right);
+}
+}
+void postorder() {
+postorderRec(root);
+}
+void postorderRec(Node root) {
+if (root != null) {
+postorderRec(root.left);
+postorderRec(root.right);
+System.out.print(root.key + " ");
+}
+}
+void printTree() {
+printTreeRec(root, 0);
+}
+void printTreeRec(Node root, int level) {
+if (root != null) {
+printTreeRec(root.right, level + 1);
+for (int i = 0; i < level; i++)
+System.out.print(" ");
+System.out.println(root.key);
+printTreeRec(root.left, level + 1);
+}
+}
+}
+public class Main {
+public static void main(String[] args) {
+BinarySearchTree tree = new BinarySearchTree();
+Scanner sc = new Scanner(System.in);
+int choice, key;
+do {
+System.out.println("\nBinary Search Tree Operations:");
+System.out.println("1. Insert");
+System.out.println("2. Delete");
+System.out.println("3. Preorder Traversal");
+System.out.println("4. Inorder Traversal");
+System.out.println("5. Postorder Traversal");
+System.out.println("6. Display Tree");
+System.out.println("7. Exit");
+System.out.print("Enter your choice: ");
+choice = sc.nextInt();
+switch (choice) {
+case 1:
+System.out.print("Enter the key to insert: ");
+key = sc.nextInt();
+tree.insert(key);
+break;
+case 2:
+System.out.print("Enter the key to delete: ");
+key = sc.nextInt();
+tree.delete(key);
+break;
+case 3:
+System.out.print("Preorder Traversal: ");
+tree.preorder();
+break;
+case 4:
+System.out.print("Inorder Traversal: ");
+tree.inorder();
+break;
+case 5:
+System.out.print("Postorder Traversal: ");
+tree.postorder();
+break;
+case 6:
+System.out.println("Binary search tree:");
+tree.printTree();
+break;
+case 7:
+System.out.println("Exiting...");
+break;
+default:
+System.out.println("Invalid choice!");
+}
+} while (choice != 7);
+}
+}
+
+
+
+
+OUTPUT:
+Binary Search Tree Operations:
+1. Insert
+2. Delete
+3. Preorder Traversal
+4. Inorder Traversal
+5. Postorder Traversal
+6. Display Tree
+7. Exit
+Enter your choice: 1
+Enter the key to insert: 6
+Enter your choice: 1
+Enter the key to insert: 3
+Enter your choice: 1
+Enter the key to insert: 9
+Enter your choice: 1
+Enter the key to insert: 7
+Enter your choice: 1
+Enter the key to insert: 3
+Enter your choice: 1
+Enter the key to insert: 2
+Enter your choice: 1
+Enter the key to insert: 7
+Enter your choice: 3
+Preorder Traversal: 6 3 2 9 7
+Enter your choice: 4
+Inorder Traversal: 2 3 6 7 9
+Enter your choice: 3
+Preorder Traversal: 6 3 2 9 7
+Enter your choice: 4
+Inorder Traversal: 2 3 6 7 9
+Enter your choice: 5
+Postorder Traversal: 2 3 7 9 6
+Enter your choice: 6
+Binary search tree:
+ 9
+ 7
+6
+ 3
+ 2
+Enter your choice: 2
+Enter the key to delete: 3
+Enter your choice: 6
+Binary search tree:
+ 9
+ 7
+6
+ 2
+
+
+
+
+
+
+15. Write java program to demonstrate Depth First Search.
+CODE:
+import java.util.Scanner;
+import java.util.Stack;
+public class dfs {
+ private int V;
+ private int[][] adj;
+ public dfs(int v) {
+ V = v;
+ adj = new int[V][V];
+ }
+ public void addEdge(int u, int v) {
+ adj[u][v] = 1;
+ adj[v][u] = 1;
+ }
+ public void dfs(int start) {
+ boolean[] visited = new boolean[V];
+ Stack<Integer> stack = new Stack<>();
+ stack.push(start);
+ visited[start] = true;
+ System.out.print(start + " ");
+ while (!stack.isEmpty()) {
+ int u = stack.peek();
+ boolean found = false;
+ for (int v = 0; v < V; v++) {
+ if (adj[u][v] == 1 && !visited[v]) {
+ stack.push(v);
+ visited[v] = true;
+ System.out.print(v + " ");
+ found = true;
+ break;
+ }
+ }
+ if (!found) {
+ stack.pop();
+ }
+ }
+ }
+ public static void main(String[] args) {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter the number of vertices: ");
+ int V = sc.nextInt();
+ dfs graph = new dfs(V);
+ System.out.print("Enter the number of edges: ");
+ int E = sc.nextInt();
+ System.out.println("Enter the edges:");
+ for (int i = 0; i < E; i++) {
+ int u = sc.nextInt();
+ int v = sc.nextInt();
+ graph.addEdge(u, v);
+ }
+ System.out.print("Enter the starting vertex: ");
+ int start = sc.nextInt();
+ sc.close();
+ System.out.print("DFS traversal: ");
+ graph.dfs(start);
+ }
+}
+
+
+OUTPUT:
+Enter the number of vertices: 4
+Enter the number of edges: 5
+Enter the edges:
+1 2
+2 3
+1 3
+2 1
+3 1
+Enter the starting vertex: 1
+DFS traversal: 1 2 3
+
+
+
+
+
+16. Write java program to demonstrate Breadth First Search.
+CODE:
+import java.util.*;
+class Graph {
+ private int V; // Number of vertices
+ private LinkedList<Integer>[] adj; // Adjacency list representation of the graph
+ // Constructor
+ Graph(int v) {
+ V = v;
+ adj = new LinkedList[v];
+ for (int i = 0; i < v; ++i)
+ adj[i] = new LinkedList();
+ }
+ // Function to add an edge into the graph
+ void addEdge(int v, int w) {
+ adj[v].add(w);
+ }
+ // BFS traversal starting from a given source vertex
+ void BFS(int s) {
+ boolean[] visited = new boolean[V]; // Mark all the vertices as not visited
+ LinkedList<Integer> queue = new LinkedList<Integer>(); // Create a queue for BFS
+ visited[s] = true; // Mark the current node as visited and enqueue it
+ queue.add(s);
+ while (queue.size() != 0) {
+ s = queue.poll(); // Dequeue a vertex from queue and print it
+ System.out.print(s + " ");
+ Iterator<Integer> i = adj[s].listIterator();
+ while (i.hasNext()) {
+ int n = i.next();
+ if (!visited[n]) {
+ visited[n] = true; // Mark the current node as visited and enqueue it
+ queue.add(n);
+ }
+ }
+ }
+ }
+}
+public class BFSDemo {
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter the number of vertices: ");
+ int V = scanner.nextInt();
+ Graph graph = new Graph(V);
+ System.out.print("Enter the number of edges: ");
+ int E = scanner.nextInt();
+ System.out.println("Enter the edges (source vertex followed by destination vertex):");
+ for (int i = 0; i < E; i++) {
+ int source = scanner.nextInt();
+ int destination = scanner.nextInt();
+ graph.addEdge(source, destination);
+ }
+ System.out.print("Enter the source vertex for BFS: ");
+ int sourceVertex = scanner.nextInt();
+ System.out.println("BFS traversal starting from source vertex " + sourceVertex + ":");
+ graph.BFS(sourceVertex);
+ scanner.close();
+ }
+}
+
+
+
+OUTPUT:
+Enter the number of vertices: 5
+Enter the number of edges: 5
+Enter the edges:
+1 3
+1 2
+1 4
+2 4
+4 3
+Enter the starting vertex: 1
+BFS traversal: 1 2 3 4
+
+
+
+
+
+
+17. Write a program to sort element using merge sort technique.
+CODE:
+import java.util.*;
+public class merge
+{
+ // merge two subarrays of arr[]
+ // first subarray is arr[l..m]
+ // second subarray is arr[m+1..r]
+ void merge(int arr[], int l, int m, int r) {
+ // find sizes of two subarrays to be merged
+ int n1 = m - l + 1;
+ int n2 = r - m;
+ // create temp arrays
+ int L[] = new int[n1];
+ int R[] = new int[n2];
+ // copy data to temp arrays
+ for (int i = 0; i < n1; ++i) {
+ L[i] = arr[l + i];
+ }
+ for (int j = 0; j < n2; ++j) {
+ R[j] = arr[m + 1 + j];
+ }
+ // merge the temp arrays
+ // initial indexes of first and second subarrays
+ int i = 0, j = 0;
+ // initial index of merged subarray array
+ int k = l;
+ while (i < n1 && j < n2) {
+ if (L[i] <= R[j]) {
+ arr[k] = L[i];
+ i++;
+ } else {
+ arr[k] = R[j];
+ j++;
+ }
+ k++;
+ }
+ // copy remaining elements of L[] if any
+ while (i < n1) {
+ arr[k] = L[i];
+ i++;
+ k++;
+ }
+ // copy remaining elements of R[] if any
+ while (j < n2) {
+arr[k] = R[j];
+ j++;
+ k++;
+ }
+ }
+ // main function that sorts arr[l..r] using merge()
+ void sort(int arr[], int l, int r) {
+ if (l < r) {
+ // find the middle point
+ int m = (l + r) / 2;
+ // sort first and second halves
+ sort(arr, l, m);
+ sort(arr, m + 1, r);
+ // merge the sorted halves
+ merge(arr, l, m, r);
+ }
+ }
+ // main method
+ public static void main(String args[]) {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter the size of the array: ");
+ int n = sc.nextInt();
+ int arr[] = new int[n];
+ System.out.println("Enter the elements of the array:");
+ for (int i = 0; i < n; i++) {
+ arr[i] = sc.nextInt();
+ }
+ merge ob = new merge();
+ ob.sort(arr, 0, n - 1);
+ System.out.println("Sorted array:");
+ for (int i = 0; i < n; i++) {
+ System.out.print(arr[i] + " ");
+ }
+ }
+}
+
+
+OUTPUT:
+Enter the size of the array: 5
+Enter the elements of the array:
+9 2 5 7 1
+Sorted array:
+2 5 7 9
+
+
+
+
+
+
+18. Write a program to implement Prims Algorithm.
+CODE:
+import java.util.Arrays;
+import java.util.Scanner;
+public class PrimAlgorithm {
+ public static void main(String[] args) {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter the number of vertices: ");
+ int V = sc.nextInt();
+ int[][] G = new int[V][V];
+ System.out.println("Enter the adjacency matrix:");
+ for (int i = 0; i < V; i++) {
+ for (int j = 0; j < V; j++) {
+ G[i][j] = sc.nextInt();
+ }
+ }
+ prim(G, V);
+ }
+ public static void prim(int[][] G, int V) {
+ int[] parent = new int[V];
+ int[] key = new int[V];
+ boolean[] mstSet = new boolean[V];
+ Arrays.fill(key, Integer.MAX_VALUE);
+ key[0] = 0;
+ parent[0] = -1;
+ for (int i = 0; i < V - 1; i++) {
+ int u = minKey(key, mstSet, V);
+ mstSet[u] = true;
+ for (int v = 0; v < V; v++) {
+ if (G[u][v] != 0 && !mstSet[v] && G[u][v] < key[v]) {
+ parent[v] = u;
+ key[v] = G[u][v];
+ }
+ }
+ }
+ printMST(parent, G, V);
+ }
+ public static int minKey(int[] key, boolean[] mstSet, int V) {
+ int minIndex = -1;
+ int minValue = Integer.MAX_VALUE;
+ for (int i = 0; i < V; i++) {
+ if (!mstSet[i] && key[i] < minValue) {
+ minValue = key[i];
+ minIndex = i;
+ }
+ }
+ return minIndex;
+ }
+ public static void printMST(int[] parent, int[][] G, int V) {
+ System.out.println("Minimum Spanning Tree:");
+ for (int i = 1; i < V; i++) {
+ System.out.println(parent[i] + " - " + i + "\t" + G[i][parent[i]]);
+ }
+ }
+}
+
+
+Output:
+Enter the number of vertices: 5
+Enter the adjacency matrix:
+0 2 0 6 0
+2 0 3 8 5
+0 3 0 0 7
+6 8 0 0 9
+0 5 7 9 0
+Edges of the minimum spanning tree:
+0 - 1 2
+1 - 2 3
+0 - 3 6
+1 - 4 5
+
+
+
+
+19. Write a java program to find minimum and maximum in the given list using divide and
+conquer method.
+CODE:
+import java.util.*;
+public class minmax {
+ static class MinMax {
+ int min;
+ int max;
+ }
+ static MinMax findMinMax(int[] arr, int low, int high) {
+ MinMax result = new MinMax();
+ // Base case: if the list contains only one element
+ if (low == high) {
+ result.min = arr[low];
+ result.max = arr[low];
+ return result;
+ }
+ // If there are more than one elements, divide the list into two halves
+ if (high == low + 1) {
+ if (arr[low] < arr[high]) {
+ result.min = arr[low];
+ result.max = arr[high];
+ } else {
+ result.min = arr[high];
+ result.max = arr[low];
+ }
+ return result;
+ }
+ // If there are more than two elements, divide the list recursively
+ int mid = (low + high) / 2;
+ MinMax leftResult = findMinMax(arr, low, mid);
+ MinMax rightResult = findMinMax(arr, mid + 1, high);
+ // Compare the minimum and maximum of the two halves
+ result.min = Math.min(leftResult.min, rightResult.min);
+ result.max = Math.max(leftResult.max, rightResult.max);
+ return result;
+ }
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter the number of elements: ");
+ int n = scanner.nextInt();
+ int[] arr = new int[n];
+ System.out.print("Enter the elements: ");
+ for (int i = 0; i < n; i++) {
+ arr[i] = scanner.nextInt();
+ }
+ MinMax result = findMinMax(arr, 0, n - 1);
+ System.out.println("Minimum number: " + result.min);
+ System.out.println("Maximum number: " + result.max);
+ }
+}
+
+
+OUTPUT:
+Enter the number of elements: 5
+Enter the elements: 5 6 1 9 28
+Minimum number: 1
+Maximum number: 28
+
+
+
+
+
+
+
+20. Write a java program to implement knapsack problem.
+CODE:
+import java.util.*;
+public class Knapsack {
+ public static void main(String[] args) {
+ Scanner scanner = new Scanner(System.in);
+ System.out.print("Enter the number of items: ");
+ int numItems = scanner.nextInt();
+ int[] weights = new int[numItems];
+ int[] values = new int[numItems];
+ System.out.println("Enter the weight and value of each item:");
+ for (int i = 0; i < numItems; i++) {
+ System.out.print("Item " + (i + 1) + " weight: ");
+ weights[i] = scanner.nextInt();
+ System.out.print("Item " + (i + 1) + " value: ");
+ values[i] = scanner.nextInt();
+ }
+ System.out.print("Enter the maximum weight capacity of the knapsack: ");
+ int capacity = scanner.nextInt();
+ int[][] dp = new int[numItems + 1][capacity + 1];
+ for (int i = 1; i <= numItems; i++) {
+ for (int j = 1; j <= capacity; j++) {
+ if (weights[i - 1] <= j) {
+ dp[i][j] = Math.max(values[i - 1] + dp[i - 1][j - weights[i - 1]], dp[i - 1][j]);
+ } else {
+ dp[i][j] = dp[i - 1][j];
+ }
+ }
+ }
+ int maxValue = dp[numItems][capacity];
+ System.out.println("Maximum value that can be obtained: " + maxValue);
+ System.out.println("Items included in the knapsack:");
+ int i = numItems;
+ int j = capacity;
+ while (i > 0 && j > 0) {
+ if (dp[i][j] != dp[i - 1][j]) {
+ System.out.println("Item " + i + ": weight = " + weights[i - 1] + ", value = " + values[i
+- 1]);
+ j -= weights[i - 1];
+ }
+ i--;
+ }
+ }
+}
+
+
+Output:
+Enter the number of items: 3
+Enter the weight and value of each item:
+Item 1 weight: 3
+Item 1 value: 4
+Item 2 weight:
+5
+Item 2 value: 3
+Item 3 weight: 5
+Item 3 value: 7
+Enter the maximum weight capacity of the
+knapsack: 5
+Maximum value that can be obtained: 7
+Items included in the knapsack:
+Item 3: weight = 5, value = 7
